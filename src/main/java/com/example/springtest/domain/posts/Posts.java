@@ -1,10 +1,7 @@
 package com.example.springtest.domain.posts;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import lombok.Builder;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.example.springtest.web.dto.PostsUpdateRequestDto;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -31,6 +28,8 @@ public class Posts {
 
     private String author;
 
+    private Integer count;
+
     @Builder
     //해당 클래스의 빌더 패턴 클래스 생성
     //생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
@@ -38,5 +37,32 @@ public class Posts {
         this.title = title;
         this.content = content;
         this.author = author;
+    }
+
+    //update posts set title = "제목2" where id = id
+    public void update(String title, String content) {
+        System.out.println(this.title);
+        this.title = title;
+    }
+
+    //update posts set count = count + 1 where id = id
+    public void updateCount() {
+        this.count = this.count + 1;
+    }
+
+    public void updateTest(PostsUpdateRequestDto dto) {
+        if (dto.getContent() != null) {
+            this.content = content;
+        }
+        if (dto.getTitle() != null) {
+            this.title = title;
+        }
+        if (dto.getAuthor() != null) {
+            this.author = author;
+        }
+        if (dto.getCount() != null) {
+            this.count = count;
+        }
+
     }
 }
