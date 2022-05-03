@@ -1,5 +1,6 @@
 package com.example.springtest.domain.posts;
 
+import com.example.springtest.domain.BaseTimeEntity;
 import com.example.springtest.web.dto.PostsUpdateRequestDto;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 //테이블과 링크될 클래스임을 나타냄
 //기본값으로 클래스의 카멜케이스 이름을 언더스코어 네이밍(_)으로 테이블 이름을 매칭
-public class Posts {
+public class Posts extends BaseTimeEntity { //posts클래스가 BaseTimeEntity를 상속받도록 함
     //여기서 Posts클래스는 Entity클래스라고도 함
 
     @Id
@@ -28,7 +29,7 @@ public class Posts {
 
     private String author;
 
-    private Integer count;
+    //private Integer count;
 
     @Builder
     //해당 클래스의 빌더 패턴 클래스 생성
@@ -45,24 +46,24 @@ public class Posts {
         this.title = title;
     }
 
-    //update posts set count = count + 1 where id = id
-    public void updateCount() {
-        this.count = this.count + 1;
-    }
-
-    public void updateTest(PostsUpdateRequestDto dto) {
-        if (dto.getContent() != null) {
-            this.content = content;
-        }
-        if (dto.getTitle() != null) {
-            this.title = title;
-        }
-        if (dto.getAuthor() != null) {
-            this.author = author;
-        }
-        if (dto.getCount() != null) {
-            this.count = count;
-        }
-
-    }
+//    //update posts set count = count + 1 where id = id
+//    public void updateCount() {
+//        this.count = this.count + 1;
+//    }
+//
+//    public void updateTest(PostsUpdateRequestDto dto) {
+//        if (dto.getContent() != null) {
+//            this.content = content;
+//        }
+//        if (dto.getTitle() != null) {
+//            this.title = title;
+//        }
+//        if (dto.getAuthor() != null) {
+//            this.author = author;
+//        }
+//        if (dto.getCount() != null) {
+//            this.count = count;
+//        }
+//
+//    }
 }

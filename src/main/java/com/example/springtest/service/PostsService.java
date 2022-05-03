@@ -14,9 +14,9 @@ import java.util.Optional;
 @Service
 public class PostsService {
 
-    private final PostsRepository postsRepository;
+    private final PostsRepository postsRepository; //dao
 
-    @Transactional
+    @Transactional //CUD시 사용, begin, commit을 자동 수행, 예외 발생시 rollback 수행
     public Long save(PostsSaveRequestDto requestDto) {
         return postsRepository.save(requestDto.toEntity()).getId();
     }
@@ -30,11 +30,11 @@ public class PostsService {
         return id;
     }
 
-    public PostsResponseDto findById (Long id) {
+    public PostsResponseDto findById (Long id) { //read작업이라 @Transaction 사용하지 않음
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
-        return new PostsResponseDto((entity));
+        return new PostsResponseDto(entity);
     }
 
 //    @Transactional
